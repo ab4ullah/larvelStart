@@ -30,8 +30,8 @@
                       <td>{{user.id}}</td>
                       <td>{{user.name}}</td>
                       <td>{{user.email}}</td>
-                      <td>{{user.type}}</td>
-                      <td>{{user.created_at}}</td>
+                      <td>{{user.type | uptext}}</td>
+                      <td>{{user.created_at | mydate}}</td>
                       <td>
                           <a href="#"><i class="fas fa-user-edit"></i></a>
                           /
@@ -138,7 +138,14 @@
 
         methods :{
            createUser(){
-               this.form.post('api/user')
+               this.$Progress.start();
+               this.form.post('api/user');
+               $('#addnew').modal('hide')
+               Toast.fire({
+                icon: 'success',
+                title: 'user created successfully'
+                })
+               this.$Progress.finish();
 
            },
 
